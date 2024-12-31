@@ -30,12 +30,16 @@ export class TodoListComponent implements OnInit,OnDestroy {
     this.getTodoList();
 
     this.sub = this.dataService.currentData.subscribe((data) => {
-      this.receivedData.set(data); // Access the shared data
-      console.log('Received Data:', this.receivedData);
-      setTimeout(()=>{
-        this.receivedData.set("");
-      },1000)
+     this.showAlert(data)
     });
+  }
+
+  private showAlert(data : string){
+    this.receivedData.set(data); // Access the shared data
+    console.log('Received Data:', this.receivedData);
+    setTimeout(()=>{
+      this.receivedData.set("");
+    },1000)
   }
 
   private getTodoList() {
@@ -80,10 +84,7 @@ export class TodoListComponent implements OnInit,OnDestroy {
       next: (value) => {
         console.log(value)
         this.getTodoList();
-        this.receivedData.set("Delete Successfully")
-        setTimeout(()=>{
-          this.receivedData.set("");
-        },1000)
+        this.showAlert("Delete Successfully");
       },
       error: (error) => {
         console.log(error)
