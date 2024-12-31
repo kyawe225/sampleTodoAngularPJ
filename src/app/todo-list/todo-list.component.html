@@ -1,4 +1,11 @@
-<table class="table table-striped">
+@if(receivedData() != ""){
+	<ngb-alert type="success" [dismissible]="false">
+		<span class="">{{receivedData()}}</span>
+	</ngb-alert>
+}
+
+
+<table class="table table-striped my-3">
 	<thead>
 		<tr>
 			<th scope="col">#</th>

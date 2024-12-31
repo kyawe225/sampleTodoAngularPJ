@@ -5,6 +5,7 @@ import { TodoCreate } from '../model/todo';
 import { NgbDatepickerModule, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { ModalDeleteComponent } from '../modal-delete/modal-delete.component';
 import { Router } from '@angular/router';
+import { MessageServiceService } from '../service/message-service.service';
 
 @Component({
   selector: 'app-todo-create',
@@ -21,7 +22,7 @@ export class TodoCreateComponent {
 
   public formGroup : FormGroup;
 
-  public constructor(formBuilder: FormBuilder , private todoService : TodoService, private router: Router){
+  public constructor(formBuilder: FormBuilder , private todoService : TodoService, private router: Router, private dataService : MessageServiceService){
     this.formGroup = formBuilder.group({
       task: ['',Validators.required],
       description : ['',Validators.required]
@@ -36,6 +37,7 @@ export class TodoCreateComponent {
       let sub = this.todoService.create(model).subscribe({
         next : (value)=> {
           console.log(value);
+          this.dataService.updateData("Todo Created Successfully"); 
         },
         error: (error)=>{
           console.log(error);

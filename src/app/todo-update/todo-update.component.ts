@@ -4,6 +4,7 @@ import { TodoService } from '../service/todo.service';
 import { Todo, TodoCreate } from '../model/todo';
 import { ActivatedRoute, ActivatedRouteSnapshot, Router } from '@angular/router';
 import { ResponseModel } from '../model/response-model';
+import { MessageServiceService } from '../service/message-service.service';
 
 @Component({
   selector: 'app-todo-update',
@@ -15,7 +16,7 @@ export class TodoUpdateComponent implements OnInit {
   public formGroup : FormGroup;
   public id : string;
 
-  public constructor(formBuilder: FormBuilder, private todoService : TodoService,private activatedRoute : ActivatedRoute,private router:Router ){
+  public constructor(formBuilder: FormBuilder, private todoService : TodoService,private activatedRoute : ActivatedRoute,private router:Router , private dataService : MessageServiceService ){
     this.formGroup = formBuilder.group({
       task: ['',Validators.required],
       description : ['',Validators.required]
@@ -53,6 +54,7 @@ export class TodoUpdateComponent implements OnInit {
       let sub = this.todoService.update(this.id,model).subscribe({
         next : (value)=> {
           console.log(value);
+          this.dataService.updateData("Todo Updated Successfully");
         },
         error: (error)=>{
           console.log(error);
