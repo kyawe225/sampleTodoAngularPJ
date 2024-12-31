@@ -1,0 +1,25 @@
+<table class="table table-striped">
+	<thead>
+		<tr>
+			<th scope="col">#</th>
+			<th scope="col" sortable="name">Task</th>
+			<th scope="col" sortable="area">Description</th>
+			<th scope="col" sortable="area">Action</th>
+		</tr>
+	</thead>
+	<tbody>
+		@for (item of datasource(); track item.id) {
+			<tr>
+				<th scope="row">{{ item.id }}</th>
+				<td>
+					{{item.task}}
+				</td>
+				<td>{{ item.description }}</td>
+                <td>
+                    <button class="btn btn-primary" (click)="clickUpdateTodo(item.id)">Update</button>
+                    <button class="btn btn-danger" (click)="clickDeleteTodo(item.id)">Delete</button>
+                </td>
+			</tr>
+		}
+	</tbody>
+</table>

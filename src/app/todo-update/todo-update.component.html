@@ -1,0 +1,18 @@
+<p>todo-update works!</p>
+<form [formGroup]="formGroup">
+    <div class="p-1">
+        <label>
+            Task
+        </label>
+        <input type="text" formControlName="task" class="form-control" />
+    </div>
+    <div class="p-1">
+        <label>
+            Description
+        </label>
+        <textarea formControlName="description" class="form-control"></textarea>
+    </div>
+    <div class="p-1">
+        <button class="btn btn-primary" (click)="submit()">Submit</button>
+    </div>
+</form>
